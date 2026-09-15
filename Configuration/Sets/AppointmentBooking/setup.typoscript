@@ -1,6 +1,6 @@
-plugin.tx_appointment_booking {
+plugin.tx_appointmentbooking_booking {
     view {
-        templateRootPaths.10 = EXT:appointmentbooking_booking/Resources/Private/Templates/
+        templateRootPaths.10 = EXT:appointment_booking/Resources/Private/Templates/
     }
 }
 
