@@ -1,0 +1,4 @@
+name: dominik/appointment-booking
+label: 'Appointment Booking'
+dependencies:
+  - typo3/fluid-styled-content

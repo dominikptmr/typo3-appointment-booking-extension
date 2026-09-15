@@ -1,0 +1,16 @@
+plugin.tx_appointment_booking {
+    view {
+        templateRootPaths.10 = EXT:appointmentbooking_booking/Resources/Private/Templates/
+    }
+}
+
+page {
+    includeCSS {
+        appointmentBooking = EXT:appointment_booking/Resources/Public/Css/booking.css
+    }
+
+    includeJSFooter {
+        appointmentBooking = EXT:appointment_booking/Resources/Public/JavaScript/booking.js
+        appointmentBooking.defer = 1
+    }
+}
