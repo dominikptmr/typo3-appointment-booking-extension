@@ -1,0 +1,36 @@
+settings:
+  appointmentBooking.durationMinutes:
+    label: 'Appointment duration'
+    description: 'Duration of one appointment in minutes'
+    type: int
+    default: 30
+
+  appointmentBooking.openingHours:
+    label: 'Opening hours'
+    description: 'Starting time for appointment bookings in HH:MM format'
+    type: string
+    default: '09:00'
+
+  appointmentBooking.closingHours:
+    label: 'Closing hours'
+    description: 'Ending time for appointment bookings in HH:MM format'
+    type: string
+    default: '17:00'
+  
+  appointmentBooking.availableWeekdays:
+    label: 'Available weekdays'
+    description: 'List of weekdays available for appointments: 1 = Monday, ..., 7 = Sunday'
+    type: stringlist
+    default: ['1', '2', '3', '4', '5']
+
+  appointmentBooking.bufferDays:
+    label: 'Buffer days'
+    description: 'Minimum buffer in days before new bookings are available: 1 = from tomorrow'
+    type: int
+    default: 1
+
+  appointmentBooking.advanceDays:
+    label: 'Advance days'
+    description: 'Maximum number of days an appointment can be booked in advance'
+    type: int
+    default: 30
