@@ -4,15 +4,17 @@ settings:
     description: 'Duration of one appointment in minutes'
     type: int
     default: 30
+    options:
+      min: 1
 
-  appointmentBooking.openingHours:
-    label: 'Opening hours'
+  appointmentBooking.startingTime:
+    label: 'Starting time'
     description: 'Starting time for appointment bookings in HH:MM format'
     type: string
     default: '09:00'
 
-  appointmentBooking.closingHours:
-    label: 'Closing hours'
+  appointmentBooking.endingTime:
+    label: 'Ending time'
     description: 'Ending time for appointment bookings in HH:MM format'
     type: string
     default: '17:00'
@@ -28,9 +30,13 @@ settings:
     description: 'Minimum buffer in days before new bookings are available: 1 = from tomorrow'
     type: int
     default: 1
+    options:
+      min: 0
 
   appointmentBooking.advanceDays:
     label: 'Advance days'
     description: 'Maximum number of days an appointment can be booked in advance'
     type: int
     default: 30
+    options:
+      min: 0
