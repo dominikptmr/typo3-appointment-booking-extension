@@ -40,3 +40,8 @@ settings:
     default: 30
     options:
       min: 0
+
+  appointmentBooking.timezone:
+    label: 'Timezone'
+    type: string
+    default: 'Europe/Berlin'

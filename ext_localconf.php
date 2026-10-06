@@ -11,10 +11,10 @@ ExtensionUtility::configurePlugin(
     'AppointmentBooking',
     'Booking',
     [
-        BookingController::class => 'index',
+        BookingController::class => 'index, book',
     ],
     [
-        BookingController::class => 'index'
+        BookingController::class => 'index, book',
     ],
 );
 ?>

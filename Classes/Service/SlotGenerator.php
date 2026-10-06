@@ -18,9 +18,11 @@ final class SlotGenerator {
         $weekdays = $settings->get('appointmentBooking.availableWeekdays');
         $bufferDays = $settings->get('appointmentBooking.bufferDays');
         $advanceDays = $settings->get('appointmentBooking.advanceDays');
+        $timezone = new \DateTimeZone($settings->get('appointmentBooking.timezone'));
+
 
         // Set first and last day (00:00)
-        $now = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin'));
+        $now = new \DateTimeImmutable('now',$timezone);
         $today = $now->setTime(0, 0);
         $firstDay = $today->modify("+{$bufferDays} days"); // first available day
         $lastDay = $today->modify("+{$advanceDays} days"); // last available day

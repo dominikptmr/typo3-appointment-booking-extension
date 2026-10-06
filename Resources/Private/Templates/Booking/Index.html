@@ -20,34 +20,34 @@
                                 <f:for each="{daySlots}" as="slot">
                                     <li>
                                         <button
-                                        type="button"
-                                        class="appointment-slot"
-                                        value="{slot.start -> f:format.date(format: 'c')}"
-                                        aria-pressed="false"
+                                            type="button"
+                                            class="appointment-slot"
+                                            value="{slot.start -> f:format.date(format: 'Y-m-d H:i:s')}"
+                                            aria-pressed="false"
                                         >
-        <f:format.date format="H:i">{slot.start}</f:format.date>
-        –
-        <f:format.date format="H:i">{slot.end}</f:format.date>
-    </button>
-</li>
+                                            <f:format.date format="H:i">{slot.start}</f:format.date>
+                                                –
+                                            <f:format.date format="H:i">{slot.end}</f:format.date>
+                                        </button>
+                                    </li>
                                 </f:for>
                             </ul>
                         </section>
                     </f:for>
                 </div>
-                <form class="appointment-form" method="post">
+                <f:form class="appointment-form" action="book" method="post">
                     <h3>Deine Angaben</h3>
                     <label>
                         Name
-                        <input type="text" name="name" autocomplete="name" required>
+                        <f:form.textfield type="text" name="name" required="true"/>
                     </label>
                     <label>
                         E-Mail
-                        <input type="email" name="email" autocomplete="email" required>
+                        <f:form.textfield type="email" name="email" required="true"/>
                     </label>
-                    <input type="hidden" name="selectedSlotInput">
+                    <f:form.hidden name="selectedSlotInput" id="selectedSlotInput"/>
                     <button type="submit" disabled>Termin buchen</button>
-                        </form>
+                </f:form>
             </div>
         </f:then>
         <f:else>

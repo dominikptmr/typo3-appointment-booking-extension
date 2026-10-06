@@ -1,6 +1,6 @@
 const timeslots = document.querySelectorAll('.appointment-slot');
 
-const selectedSlotInput = document.querySelector('input[name="selectedSlotInput"]');
+const selectedSlotInput = document.getElementById('selectedSlotInput');
 
 const formButton = document.querySelector(
     '.appointment-form button[type="submit"]'
