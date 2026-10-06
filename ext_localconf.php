@@ -13,6 +13,8 @@ ExtensionUtility::configurePlugin(
     [
         BookingController::class => 'index',
     ],
-    [],
+    [
+        BookingController::class => 'index'
+    ],
 );
 ?>
