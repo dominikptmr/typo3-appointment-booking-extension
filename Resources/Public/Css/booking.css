@@ -12,7 +12,7 @@
     margin: 2rem auto;
 }
 
-h2 {
+.appointment-booking-container h2 {
     font-size: 2rem;
 }
 
@@ -43,6 +43,7 @@ h2 {
 .appointment-day h3 {
     margin-top: 0;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 .appointment-day ul {
@@ -52,21 +53,28 @@ h2 {
 }
 
 .appointment-day li {
+    margin: 0.5rem 0;
+}
+
+.appointment-slot {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
     padding: 0.8rem;
     border: 1px solid #475569;
     border-radius: 8px;
-    margin: 0.5rem 0;
     background-color: #0f172a;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.appointment-day li:hover {
-    background-color: #334155;
+    color: white;
+    font: inherit;
     cursor: pointer;
+    text-align: center;
 }
 
-.appointment-day li:active {
+.appointment-slot:hover {
+    background-color: #475569;
+}
+
+.appointment-slot[aria-pressed="true"] {
     background-color: #491f5c;
 }
 

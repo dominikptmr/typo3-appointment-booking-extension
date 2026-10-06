@@ -19,10 +19,17 @@
                             <ul>
                                 <f:for each="{daySlots}" as="slot">
                                     <li>
-                                        <f:format.date format="H:i">{slot.start}</f:format.date>
-                                        –
-                                        <f:format.date format="H:i">{slot.end}</f:format.date>
-                                    </li>
+                                        <button
+                                        type="button"
+                                        class="appointment-slot"
+                                        value="{slot.start -> f:format.date(format: 'c')}"
+                                        aria-pressed="false"
+                                        >
+        <f:format.date format="H:i">{slot.start}</f:format.date>
+        –
+        <f:format.date format="H:i">{slot.end}</f:format.date>
+    </button>
+</li>
                                 </f:for>
                             </ul>
                         </section>
@@ -38,7 +45,8 @@
                         E-Mail
                         <input type="email" name="email" autocomplete="email" required>
                     </label>
-                <button type="submit" disabled>Termin buchen</button>
+                    <input type="hidden" name="selectedSlotInput">
+                    <button type="submit" disabled>Termin buchen</button>
                         </form>
             </div>
         </f:then>
