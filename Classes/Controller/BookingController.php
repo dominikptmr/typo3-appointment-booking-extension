@@ -23,7 +23,9 @@ class BookingController extends ActionController
 
         //Generate appointment timeslots
         $generator = new SlotGenerator();
-        $timeslots = $generator->generate($settings);
+        $timeslotsByDay = $generator->generate($settings);
+
+        $this->view->assign('timeslotsByDay', $timeslotsByDay);
 
         return $this->htmlResponse();
     }

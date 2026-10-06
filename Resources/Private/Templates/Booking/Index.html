@@ -1,1 +1,49 @@
-<p>Plugin Test</p>
+<div class="appointment-booking-container">
+
+    <div class="headline-container">
+        <h2>Terminbuchung</h2>
+        <p>Bitte wähle einen verfügbaren Termin aus der Liste aus.</p>
+    </div>
+
+    <f:if condition="{timeslotsByDay}">
+        <f:then>
+            <div class="booking-container">
+                <div class="appointment-days">
+                    <f:for each="{timeslotsByDay}" as="daySlots" key="date">
+                        <section class="appointment-day">
+                            <h3>
+                                <f:format.date pattern="EEEE, dd.MM.yyyy" locale="de-DE">
+                                    {date}
+                                </f:format.date>
+                            </h3>
+                            <ul>
+                                <f:for each="{daySlots}" as="slot">
+                                    <li>
+                                        <f:format.date format="H:i">{slot.start}</f:format.date>
+                                        –
+                                        <f:format.date format="H:i">{slot.end}</f:format.date>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </section>
+                    </f:for>
+                </div>
+                <form class="appointment-form" method="post">
+                    <h3>Deine Angaben</h3>
+                    <label>
+                        Name
+                        <input type="text" name="name" autocomplete="name" required>
+                    </label>
+                    <label>
+                        E-Mail
+                        <input type="email" name="email" autocomplete="email" required>
+                    </label>
+                <button type="submit" disabled>Termin buchen</button>
+                        </form>
+            </div>
+        </f:then>
+        <f:else>
+            <p>Keine Termine verfügbar.</p>
+        </f:else>
+    </f:if>
+</div>

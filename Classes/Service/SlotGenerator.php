@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteSettings;
 final class SlotGenerator {
     public function generate(SiteSettings $settings): array {
 
-        $timeslots = [];
+        $timeslotsByDay = [];
 
         //Get settings
         $duration = $settings->get('appointmentBooking.durationMinutes');
@@ -54,7 +54,14 @@ final class SlotGenerator {
                         'start' => $start,
                         'end' => $end
                     ];
-                    array_push($timeslots, $appointment);
+                    
+                    $date = $day->format('Y-m-d');
+
+                    if (!isset($timeslotsByDay[$date])) {
+                        $timeslotsByDay[$date] = [];
+                    }
+
+                    array_push($timeslotsByDay[$date], $appointment);
                 }
 
                 //Set start of next appointment slot to the end of the current clot
@@ -62,7 +69,7 @@ final class SlotGenerator {
             }
         }
 
-        return $timeslots;
+        return $timeslotsByDay;
 
     }
 }
