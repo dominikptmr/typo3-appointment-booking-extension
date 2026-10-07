@@ -47,6 +47,13 @@
                     </label>
                     <f:form.hidden name="selectedSlotInput" id="selectedSlotInput"/>
                     <button type="submit" disabled>Termin buchen</button>
+                    <f:flashMessages as="messages">
+                        <f:for each="{messages}" as="message">
+                            <p class="booking-message" role="status">
+                                {message.message}
+                            </p>
+                        </f:for>
+                    </f:flashMessages>
                 </f:form>
             </div>
         </f:then>

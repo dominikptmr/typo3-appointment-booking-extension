@@ -125,3 +125,13 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.booking-message {
+    background-color: white;
+    color: rgb(62, 0, 70);
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+}

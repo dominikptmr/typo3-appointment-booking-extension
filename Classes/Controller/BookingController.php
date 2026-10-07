@@ -13,7 +13,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class BookingController extends ActionController
 {
-    public function __construct(private readonly BookingService $bookingService) {}
+    public function __construct(
+        private readonly BookingService $bookingService,
+        private readonly SlotGenerator $slotGenerator
+        ) {}
     
     public function indexAction(): ResponseInterface
     {   
@@ -25,8 +28,7 @@ class BookingController extends ActionController
         $validator->validate($settings);
 
         //Generate appointment timeslots
-        $generator = new SlotGenerator();
-        $timeslotsByDay = $generator->generate($settings);
+        $timeslotsByDay = $this->slotGenerator->generate($settings);
 
         $this->view->assign('timeslotsByDay', $timeslotsByDay);
 
@@ -43,9 +45,9 @@ class BookingController extends ActionController
             $settings
         );
 
-        return $this->htmlResponse(
-        '<p>Daten empfangen</p>'
-    );
+        $this->addFlashMessage('Termin wurde gebucht.');
+
+        return $this->redirect('index');
     }
 }
 ?>

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Dominik\AppointmentBooking\Service;
 
 use TYPO3\CMS\Core\Site\Entity\SiteSettings;
+use Dominik\AppointmentBooking\Domain\Repository\AppointmentRepository;
 
 final class SlotGenerator {
-    public function generate(SiteSettings $settings): array {
 
+    public function __construct(private readonly AppointmentRepository $appointmentRepository) {}
+
+    public function generate(SiteSettings $settings): array {
         $timeslotsByDay = [];
 
         //Get settings
@@ -20,7 +23,6 @@ final class SlotGenerator {
         $advanceDays = $settings->get('appointmentBooking.advanceDays');
         $timezone = new \DateTimeZone($settings->get('appointmentBooking.timezone'));
 
-
         // Set first and last day (00:00)
         $now = new \DateTimeImmutable('now',$timezone);
         $today = $now->setTime(0, 0);
@@ -30,7 +32,12 @@ final class SlotGenerator {
         // Set appointment interval in minutes
         $interval = new \DateInterval("PT{$duration}M");
 
+        // Get overlapping appointments
+        $overlappingAppointments = $this->appointmentRepository->getOverlappingAppointments(
+            $firstDay,
+            $lastDay->modify('+1 day'));
 
+        // Check days for availability
         for ($day = $firstDay; $day <= $lastDay; $day = $day->modify('+1 day')) {
             
             // Check if current weekday is included in available weekdays
@@ -41,7 +48,7 @@ final class SlotGenerator {
             $start = $day->modify($startingTime);   // Start of first appointment slot
             $dayEnd = $day->modify($endingTime);    // End time of the day
 
-            // Generate timeslots
+            // Generate available timeslots for current loop day
             while (true) {
                 $end = $start->add($interval); //End of current appointment slot
                 
@@ -50,8 +57,21 @@ final class SlotGenerator {
                     break;
                 }
 
+                $isBooked = false;
+                
+                // Check if slot is already booked
+                foreach ($overlappingAppointments as $overlappingAppointment) {
+                    $bookedStart = new \DateTimeImmutable($overlappingAppointment['appointment_start'], $timezone);
+                    $bookedEnd = new \DateTimeImmutable($overlappingAppointment['appointment_end'], $timezone); 
+
+                    if ($start < $bookedEnd && $end > $bookedStart) {
+                        $isBooked = true;
+                        break;
+                    }
+                }
+
                 //Include appointment if it starts after the current date and time
-                if ($start > $now) {
+                if ($start > $now && !$isBooked) {
                     $appointment = [
                         'start' => $start,
                         'end' => $end
